@@ -1,0 +1,4 @@
+# dependencies common to all environments
+selenium==3.141.0
+boto3 >= 1.10.44
+pytest
