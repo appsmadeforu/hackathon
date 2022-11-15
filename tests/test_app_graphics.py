@@ -22,6 +22,6 @@ class TestAppGraphics(BaseTest):
                 # the graphics to load. And pipeline will terminate
         except Exception as e:
             print(e)
-        finally:
-            teardown_method(self.driver)
+        # finally:
+        #     teardown_method(self.driver)
 
