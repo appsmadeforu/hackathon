@@ -49,9 +49,13 @@ jobs:
       run: >
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o
           /tmp/awscliv2.zip
+          
           unzip -q /tmp/awscliv2.zip -d /tmp
+          
           rm /tmp/awscliv2.zip
+          
           sudo /tmp/aws/install --update
+          
           rm -rf /tmp/aws/
     - name: Send Echo
       run: echo "Hello ${{ github.event.inputs.browserFamily }}"
