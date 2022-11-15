@@ -60,5 +60,9 @@ jobs:
     - name: Get Project from AWS Device Farm
       run: >
         aws devicefarm get-project --arn=arn:aws:devicefarm:us-west-2:465255333558:project:cdff5993-eb8b-4947-a98a-3eb6e7ce614b
-    - name: Send Echo
-      run: echo "Hello ${{ github.event.inputs.browserFamily }}"
+    - name: Run Test cases for desktop project
+      run: >
+        echo "Running Test cases on browser ${{ github.event.inputs.browserFamily }}"
+        pushd $GITHUB_WORKSPACE/code
+        python main.py "${{ github.event.inputs.browserFamily }}"
+
