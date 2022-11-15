@@ -1,4 +1,4 @@
-name: Hackathon-AWS-Device-Form-Automation 
+name: Hackathon-AWS-Device-Farm-Automation 
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -20,7 +20,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  Hackathon-AWS-Device-Form-Automation:
+  Hackathon-AWS-Device-Farm-Automation:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -47,15 +47,18 @@ jobs:
         aws-region: us-west-2
     - name: Install AWS CLI v2
       run: >
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o
-          /tmp/awscliv2.zip
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o
+        /tmp/awscliv2.zip
           
-          unzip -q /tmp/awscliv2.zip -d /tmp
+        unzip -q /tmp/awscliv2.zip -d /tmp
           
-          rm /tmp/awscliv2.zip
+        rm /tmp/awscliv2.zip
           
-          sudo /tmp/aws/install --update
+        sudo /tmp/aws/install --update
           
-          rm -rf /tmp/aws/
+        rm -rf /tmp/aws/
+    - name: Get Project from AWS Device Farm
+      run: >
+        aws devicefarm get-project --arn=arn:aws:devicefarm:us-west-2:465255333558:project:cdff5993-eb8b-4947-a98a-3eb6e7ce614b
     - name: Send Echo
       run: echo "Hello ${{ github.event.inputs.browserFamily }}"
