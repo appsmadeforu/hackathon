@@ -8,12 +8,12 @@ class TestAppGraphics(BaseTest):
             self.driver.implicitly_wait(30)
             self.driver.maximize_window()
             self.driver.get("https://andreidbr.github.io/JS30/")
-            if self.driver.find_element_by_id("nav-mobile"):
+            if self.driver.find_element_by_class_name("text"):
                 print("graphics generated in full screen")
-            assert self.driver.find_element_by_id("nav-mobile")
+            assert self.driver.find_element_by_class_name("text")
             self.driver.set_window_position(0, 0) and self.driver.set_window_size(1000, 400)
             self.driver.get("https://andreidbr.github.io/JS30/")
-            tower = self.driver.find_element_by_id("nav-mobile")
+            tower = self.driver.find_element_by_class_name("text")
             if tower.is_displayed():
                 print("graphics generated after resizing")
             else:
@@ -22,5 +22,6 @@ class TestAppGraphics(BaseTest):
                 # the graphics to load. And pipeline will terminate
         except Exception as e:
             print(e)
-        finally:
-            teardown_method(self.driver)
+        # finally:
+        #     teardown_method(self.driver)
+
