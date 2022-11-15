@@ -63,6 +63,8 @@ jobs:
     - name: Run Test cases for desktop project
       run: >
         echo "Running Test cases on browser ${{ github.event.inputs.browserFamily }}"
+        
         pushd $GITHUB_WORKSPACE/code
+        
         python main.py "${{ github.event.inputs.browserFamily }}"
 
