@@ -11,7 +11,8 @@ class TestAppGraphics(BaseTest):
             if self.driver.find_element_by_class_name("text"):
                 print("graphics generated in full screen")
             assert self.driver.find_element_by_class_name("text")
-            self.driver.set_window_position(0, 0) and self.driver.set_window_size(1000, 400)
+            self.driver.set_window_position(
+                0, 0) and self.driver.set_window_size(1000, 400)
             self.driver.get("https://andreidbr.github.io/JS30/")
             tower = self.driver.find_element_by_class_name("text")
             if tower.is_displayed():
@@ -22,5 +23,3 @@ class TestAppGraphics(BaseTest):
                 # the graphics to load. And pipeline will terminate
         except Exception as e:
             print(e)
-        
-
