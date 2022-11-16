@@ -17,18 +17,17 @@ class TestStickyNav(BaseTest):
             print(e)
         
  
-    # false positive case- scrolling up and down - not found
+    # false positive case - not found message
     def test_nav_on_scroll(self):
         try:
             self.driver.implicitly_wait(5)
             self.driver.get(
                 "https://andreidbr.github.io/JS30/24StickyNav/index.html#")
-                                                                                                    #  76px
+                                                                                                    
             if self.driver.find_element_by_xpath("//div[@class = 'logo' and style = 'padding-top: 0px']"):
             # if self.driver.find_element_by_css_selector("p.logo"):
                 print("Successfully find ")
  
-            # assert self.driver.find_element_by_
         except Exception as e:
             print(e)
         finally:
