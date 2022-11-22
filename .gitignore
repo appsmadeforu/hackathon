@@ -3,3 +3,7 @@
 venv
 tests/__pycache__
 utils/__pycache__/
+allure-report
+.vscode
+env
+__pycache__
