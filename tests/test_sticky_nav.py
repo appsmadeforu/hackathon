@@ -1,11 +1,10 @@
-from tests.base_test import BaseTest, teardown_method
+from tests.base_test import BaseTest
 
 
 class TestStickyNav(BaseTest):
 
     def test_sticky_main(self):
         try:
-            self.driver.implicitly_wait(5)
             self.driver.get(
                 "https://andreidbr.github.io/JS30/24StickyNav/index.html#")
             print(self.driver.title)
@@ -20,7 +19,6 @@ class TestStickyNav(BaseTest):
     # false positive case - not found message
     def test_nav_on_scroll(self):
         try:
-            self.driver.implicitly_wait(5)
             self.driver.get(
                 "https://andreidbr.github.io/JS30/24StickyNav/index.html#")
                                                                                                     
@@ -30,5 +28,3 @@ class TestStickyNav(BaseTest):
  
         except Exception as e:
             print(e)
-        finally:
-             teardown_method(self.driver)

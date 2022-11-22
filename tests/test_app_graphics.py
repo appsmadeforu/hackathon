@@ -1,11 +1,10 @@
-from tests.base_test import BaseTest, teardown_method
+from tests.base_test import BaseTest
 
 
 class TestAppGraphics(BaseTest):
 
     def test(self):
         try:
-            self.driver.implicitly_wait(30)
             self.driver.maximize_window()
             self.driver.get("https://andreidbr.github.io/JS30/")
             if self.driver.find_element_by_class_name("text"):
