@@ -95,16 +95,16 @@ jobs:
         PUBLISH_DIR: allure-history
 
     - name: Run Test cases for Mobile project
-        if: github.event.inputs.projectType == 'mobile'
-        run: >
-          echo "Running Test cases on mobile ${{ github.event.inputs.mobileAppType }}"
+      if: github.event.inputs.projectType == 'mobile'
+      run: >
+        echo "Running Test cases on mobile ${{ github.event.inputs.mobileAppType }}"
 
-          aws s3 cp s3://hackathonartifacts/app-debug.apk  --region us-west-2 /tmp
+        aws s3 cp s3://hackathonartifacts/app-debug.apk  --region us-west-2 /tmp
 
-          aws s3 cp s3://hackathonartifacts/app-debug-androidTest.apk  --region us-west-2 /tmp
+        aws s3 cp s3://hackathonartifacts/app-debug-androidTest.apk  --region us-west-2 /tmp
 
-          ls -la /tmp/
+        ls -la /tmp/
 
-          python main.py
-        continue-on-error: true
+        python main.py
+      continue-on-error: true
     
