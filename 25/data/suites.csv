@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Nov 23 15:46:48 GMT 2022","Wed Nov 23 15:46:54 GMT 2022","5858","tests","test_app_graphics","TestAppGraphics","","","test",""
+"passed","Wed Nov 23 15:47:40 GMT 2022","Wed Nov 23 15:47:42 GMT 2022","2363","tests","test_sticky_nav","TestStickyNav","","","test_sticky_main",""
+"passed","Wed Nov 23 15:48:31 GMT 2022","Wed Nov 23 15:48:32 GMT 2022","1549","tests","test_sticky_nav","TestStickyNav","","","test_nav_on_scroll",""
