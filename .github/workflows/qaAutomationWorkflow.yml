@@ -77,10 +77,12 @@ jobs:
         pushd $GITHUB_WORKSPACE/code
         
         export PATH=$PATH:/tmp/allure-2.20.1/bin
-
-        allure generate
         
-        pytest -s --alluredir=allure-report/ --browser="${{ github.event.inputs.browserFamily }}"
+        pytest -s --alluredir=allure-results/ --browser="${{ github.event.inputs.browserFamily }}"
+        
+        ls -la
+        
+        ls -la allure-results/
   
     - name: Get Allure history
       uses: actions/checkout@v2
@@ -94,7 +96,7 @@ jobs:
       uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        allure_results: allure-results
+        allure_results: code/allure-results
         allure_report: allure-report
         allure_history: allure-history
         keep_reports: 20
@@ -106,12 +108,4 @@ jobs:
         PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
-    - name: Post the link to the report
-      if: always()
-      uses: Sibz/github-status-action@v1
-      with: 
-        authToken: ${{secrets.GITHUB_TOKEN}}
-        context: 'Test report for ${{ github.run_number }}'
-        state: '${{ job.status }}'
-        sha: ${{github.event.pull_request.head.sha || github.sha}}
-        target_url: appsmadeforu.github.io/github-allure-history/${{ github.run_number }}
+    
