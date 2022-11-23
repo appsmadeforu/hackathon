@@ -70,15 +70,14 @@ jobs:
         
         chmod -R +x /tmp/allure-2.20.1/bin
         
-        echo "/tmp/allure-2.20.1/bin" >> $PATH
-        
     - name: Run Test cases for desktop project
       run: >
         echo "Running Test cases on browser ${{ github.event.inputs.browserFamily }}"
         
         pushd $GITHUB_WORKSPACE/code
         
+        export PATH=$PATH:/tmp/allure-2.20.1/bin
+
         allure generate
         
         pytest -s --alluredir=allure-report/ --browser="${{ github.event.inputs.browserFamily }}"
-
