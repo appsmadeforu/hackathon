@@ -66,11 +66,11 @@ jobs:
       run: >
         curl -sL https://github.com/allure-framework/allure2/releases/download/2.20.1/allure-2.20.1.tgz > /tmp/allure-2.20.1.tgz
         
-        ls -la
+        tar -xvf /tmp/allure-2.20.1.tgz
         
-        tar -xf /tmp/allure-2.20.1.tgz
+        ls -la /tmp/
         
-        ls -la
+        pwd
         
         chmod -R +x /tmp/allure-2.20.1/bin
         
