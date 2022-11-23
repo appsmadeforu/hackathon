@@ -16,6 +16,11 @@ on:
         default: 'desktop'
         # Input has to be provided for the workflow to run
         required: true
+      mobileAppType:
+        description: 'Enter the mobile app type name like android, ios or web etc'
+        default: 'android'
+        # Input has to be provided for the workflow to run
+        required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -57,22 +62,16 @@ jobs:
         rm -rf /tmp/aws/
         
     - name: Run Test cases for desktop project
-      if: always()
+      if: github.event.inputs.projectType == 'desktop'
       run: >
         echo "Running Test cases on browser ${{ github.event.inputs.browserFamily }}"
         
-        export PATH=$PATH:/tmp/allure-2.20.1/bin
-        
         pytest -s --alluredir=allure-results/ --browser="${{ github.event.inputs.browserFamily }}"
-        
-        ls -la
-        
-        ls -la allure-results/
       continue-on-error: true
   
     - name: Get Allure history
       uses: actions/checkout@v2
-      if: always()
+      if: github.event.inputs.projectType == 'desktop'
       continue-on-error: true
       with:
         ref: gh-pages
@@ -80,7 +79,7 @@ jobs:
 
     - name: Allure Report action
       uses: simple-elf/allure-report-action@master
-      if: always()
+      if: github.event.inputs.projectType == 'desktop'
       with:
         allure_results: allure-results
         allure_report: allure-report
@@ -88,10 +87,24 @@ jobs:
         keep_reports: 20
 
     - name: Deploy report to Github Pages
-      if: always()
+      if: github.event.inputs.projectType == 'desktop'
       uses: peaceiris/actions-gh-pages@v2
       env:
         PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
+
+    - name: Run Test cases for Mobile project
+        if: github.event.inputs.projectType == 'mobile'
+        run: >
+          echo "Running Test cases on mobile ${{ github.event.inputs.mobileAppType }}"
+
+          aws s3 cp s3://hackathonartifacts/app-debug.apk  --region us-west-2 /tmp
+
+          aws s3 cp s3://hackathonartifacts/app-debug-androidTest.apk  --region us-west-2 /tmp
+
+          ls -la /tmp/
+
+          python main.py
+        continue-on-error: true
     
