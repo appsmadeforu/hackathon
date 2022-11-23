@@ -68,10 +68,6 @@ jobs:
         
         tar -xvzf /tmp/allure-2.20.1.tgz -C /tmp/
         
-        ls -la /tmp/
-        
-        pwd
-        
         chmod -R +x /tmp/allure-2.20.1/bin
         
         export PATH=$PATH:/tmp/allure-2.20.1/bin
@@ -84,5 +80,7 @@ jobs:
         
         pushd $GITHUB_WORKSPACE/code
         
-        # python main.py "${{ github.event.inputs.browserFamily }}"
+        allure generate
+        
+        pytest -s --alluredir=allure-report/ --browser="${{ github.event.inputs.browserFamily }}"
 
