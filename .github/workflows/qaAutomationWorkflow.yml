@@ -70,9 +70,7 @@ jobs:
         
         chmod -R +x /tmp/allure-2.20.1/bin
         
-        export PATH=$PATH:/tmp/allure-2.20.1/bin
-        
-        allure --version
+        echo "/tmp/allure-2.20.1/bin" >> $PATH
         
     - name: Run Test cases for desktop project
       run: >
