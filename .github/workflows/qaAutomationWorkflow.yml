@@ -57,14 +57,28 @@ jobs:
         sudo /tmp/aws/install --update
           
         rm -rf /tmp/aws/
-    - name: Get Project from AWS Device Farm
+    - name: Set up JDK 8 For Allure
+      uses: actions/setup-java@v1
+      with:
+        java-version: '8'
+        distribution: Zulu OpenJDK
+    - name: Setup Allure Binary
       run: >
-        aws devicefarm get-project --arn=arn:aws:devicefarm:us-west-2:465255333558:project:cdff5993-eb8b-4947-a98a-3eb6e7ce614b
+        curl -sL https://github.com/allure-framework/allure2/releases/download/2.20.1/allure-2.20.1.tgz > /tmp/allure-2.20.1.tgz
+        
+        tar -xf /tmp/allure-2.20.1.tgz
+        
+        chmod -R +x /tmp/allure-2.20.1/bin
+        
+        export PATH=$PATH:/tmp/allure-2.20.1/bin
+        
+        allure --version
+        
     - name: Run Test cases for desktop project
       run: >
         echo "Running Test cases on browser ${{ github.event.inputs.browserFamily }}"
         
         pushd $GITHUB_WORKSPACE/code
         
-        python main.py "${{ github.event.inputs.browserFamily }}"
+        # python main.py "${{ github.event.inputs.browserFamily }}"
 
