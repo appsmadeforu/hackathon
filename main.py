@@ -3,12 +3,13 @@ import time
 
 import boto3
 import requests
+import datetime
 
 
 REGION = 'us-west-2'
 PROJECT_NAME = 'Hackathon Mobile App Android'
-DEVICE_POOL_NAME = 'Top Devices'
-RUN_TIMEOUT_SECONDS = 60 * 30
+DEVICE_POOL_NAME = 'HackathonPool'
+RUN_TIMEOUT_SECONDS = 60 * 60
 WEB_URL_TEMPLATE = 'https://us-west-2.console.aws.amazon.com/devicefarm/home#/mobile/projects/%s/runs/%s'
 
 
@@ -31,9 +32,8 @@ def get_device_pool(project_arn, name):
 
 
 def _upload_presigned_url(url, file_path):
-    with open(file_path) as fp:
-        data = fp.read()
-        result = requests.put(url, data=data, headers={'content-type': 'application/octet-stream'})
+    with open(file_path, 'rb') as file_stream:
+        result = requests.put(url, data=file_stream, headers={'content-type': 'application/octet-stream'})
         assert result.status_code == 200
 
 
@@ -66,7 +66,7 @@ def schedule_run(project_arn, name, device_pool_arn, app_arn, test_package_arn):
     return run['arn']
 
 
-def _poll_until(method, arn, get_status_callable, success_statuses, timeout_seconds=10):
+def _poll_until(method, arn, get_status_callable, success_statuses, timeout_seconds=180):
     check_every_seconds = 10 if timeout_seconds == RUN_TIMEOUT_SECONDS else 1
     start = time.time()
     while True:
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     logger.info('Test package: %s' % test_package_arn)
     test_run_arn = schedule_run(
         project_arn,
-        name='Hackathon Android App Test cases',
+        name='Hackathon Android App Test cases'+"-"+(datetime.date.today().isoformat()),
         device_pool_arn=device_pool_arn,
         app_arn=app_arn,
         test_package_arn=test_package_arn,
