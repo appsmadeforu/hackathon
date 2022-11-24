@@ -3,6 +3,7 @@ import time
 from selenium import webdriver
 from utils.aws_client import aws_client
 from utils.desired_capabilities import DesiredCapabilities
+import logging
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -25,6 +26,7 @@ def get_driver(request, get_browser):
     elif get_browser == 'ie':
         desired_capabilities = DesiredCapabilities.INTERNETEXPLORER
     time.sleep(5)
+    logger = logging()
     client_url = aws_client()
     driver = webdriver.Remote(client_url, desired_capabilities)
     request.cls.driver = driver
