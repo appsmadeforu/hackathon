@@ -1,0 +1,1 @@
+ERROR    libraries.SeleniumWrappers:SeleniumWrappers.py:87 Cannot find element - Type: xpath, Name: //*[@name='gender' and @value='male']
