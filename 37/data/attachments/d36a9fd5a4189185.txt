@@ -1,0 +1,1 @@
+ERROR    libraries.SeleniumWrappers:SeleniumWrappers.py:87 Cannot find element - Type: id, Name: //*[@type='checkbox' and @value='Bike']
