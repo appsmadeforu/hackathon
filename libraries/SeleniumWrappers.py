@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class SeleniumWrappers(BaseTest):
 
-    def open_application_site(self, url):
-        self.driver.get(url)
+    def open_application_site(self):
+        self.driver.get("https://ultimateqa.com/simple-html-elements-for-automation/")
         return self
 
     def get_page_title(self):
